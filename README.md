@@ -26,14 +26,16 @@ npm install yurine-share
      - padding:int/Array 边距，上右下左，单位px
      - width:int 宽度，单位px
      - height:int 高度，单位px
-     - lineWidth:int 绘线粗细，单位px，∈\[1, 可视半径]
+     - lineWidth:int 绘线粗细，单位px，∈\[1, 可视半径]，默认1
      - lineColor:String 绘线颜色
-     - averageWidth:int 均线粗细，单位px，∈\[1, 可视半径]
+     - averageWidth:int 均线粗细，单位px，∈\[1, 可视半径]，默认1
      - averageColor:String 均线颜色
+     - averageLineDash:Array<int> 均线虚线样式，默认\[6, 4]
+     - gridWidth:int 背景网格线粗细，单位px，∈\[1, 可视半径]，默认1
+     - gridColor:String 背景网格颜色
+     - gridLineDash:Array<int> 背景网格虚线样式，默认\[1, 0]
      - columnWidth:int 圆柱粗细，单位px，∈\[1, 可视半径]
      - columnColor:String 圆柱颜色
-     - opacity:float 绘线区域透明度
-     - gridWidth:int 背景网格线粗细，单位px，∈\[1, 可视半径]
      - curvature:float 曲线曲率，∈\[0, 1]
  * getCoords():\<Array> 获取绘制点的坐标，是个二维数组，包含所有线条
  * getCoord(index:int):\<Array> 获取第index线条的所有坐标，-1从末尾起
