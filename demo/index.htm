@@ -202,7 +202,11 @@
           if(m < 10) {
             m = '0' + m;
           }
-          $top.find('b').text(h + ':' + m);
+          var time = h + ':' + m;
+          if(time == '11:30') {
+            time = '13:00';
+          }
+          $top.find('b').text(time);
           var per = ((v - search.data.average) * 100 / search.data.average).toFixed(2);
           $right.css('top', y / 2 + 'px');
           $right.find('b').text(per + '%');
