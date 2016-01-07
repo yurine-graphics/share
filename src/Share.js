@@ -88,9 +88,8 @@ class Share {
     var y0 = padding[0];
     var y1 = (height - padding[0] - padding[2]) * 0.7;
     var y2 = height - padding[0] - padding[2] - lineHeight - 10;
-    var x0 = padding[3];
-    var x1 = width - x0;
     this.renderLine(context, padding, width, minSize, average, diff, y0, y1, y2);
+    this.renderVolume(context, padding, width, y1, y2);
     this.renderRuler(context, padding, width, height, minSize, max, min, average, diff, fontSize, lineHeight);
   }
   renderLine(context, padding, width, minSize, average, diff, y0, y1, y2) {
@@ -101,7 +100,8 @@ class Share {
     this.data.price.forEach(function(num, i) {
       var arr = [];
       if(num === null || num === undefined) {
-        arr.push(null);
+        var last = coords[i - 1];
+        arr.push(last ? last.slice(0) : null);
       }
       else {
         var x = padding[3] + stepX * i;
@@ -115,7 +115,7 @@ class Share {
     var lineWidth = parseInt(this.option.lineWidth) || 1;
     lineWidth = Math.max(lineWidth, 1);
     lineWidth = Math.min(lineWidth, minSize >> 2);
-    var lineColor = this.option.lineColor || '#0BF';
+    var lineColor = this.option.lineColor || '#3CF';
     context.strokeStyle = lineColor;
     context.lineWidth = lineWidth;
     context.setLineDash([1, 0]);
@@ -124,14 +124,14 @@ class Share {
     var opacity = parseFloat(this.option.opacity) || 0.5;
     var gr = context.createLinearGradient(0, y1, 0, y2);
     gr.addColorStop(0, 'rgba(' + color.join(',') + ',' + opacity + ')');
-    gr.addColorStop(1, 'rgba(' + color.join(',') + ',0)');
+    gr.addColorStop(1, 'rgba(' + color.join(',') + ',' + opacity / 2 + ')');
 
     switch(this.option.style) {
-      case 'staight':
-        this.renderStraight(context, coords, y1, y2, color, opacity, gr);
+      case 'curve':
+        this.renderCurve(context, coords, y0, y1, y2, color, opacity, gr);
         break;
       default:
-        this.renderCurve(context, coords, y0, y1, y2, color, opacity, gr);
+        this.renderStraight(context, coords, y1, y2, color, opacity, gr);
         break;
     }
   }
@@ -248,6 +248,28 @@ class Share {
       context.closePath();
     }
   }
+  renderVolume(context, padding, width, y1, y2) {
+    var color = this.option.volumeColor || '#79C';
+    if(color.charAt(0) != '#' && color.charAt(0) != 'r') {
+      color = '#' + color;
+    }
+    context.fillStyle = color;
+
+    var stepX = (width - padding[1] - padding[3]) / 479;
+    var max = this.data.volume[0] || 0;
+    this.data.volume.forEach(function(num) {
+      max = Math.max(max, num);
+    });
+    var diff = y2 - y1;
+    var stepY = diff / max;
+
+    this.data.volume.forEach(function(num, i) {
+      var x = padding[3] + i * stepX * 2;
+      var h = stepY * num;
+      var y = y2 - h;
+      context.fillRect(x, y, stepX, h);
+    });
+  }
   renderRuler(context, padding, width, height, minSize, max, min, average, diff, fontSize, lineHeight) {
     var color = this.option.color || '#999';
     if(color.charAt(0) != '#' && color.charAt(0) != 'r') {
@@ -284,6 +306,8 @@ class Share {
     context.lineTo(x1, y0);
     context.moveTo(x0, y1);
     context.lineTo(x1, y1);
+    context.moveTo(x0, y2);
+    context.lineTo(x1, y2);
     context.stroke();
     context.closePath();
 

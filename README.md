@@ -39,8 +39,7 @@ npm install yurine-share
      - gridWidth:int 背景网格线粗细，单位px，∈\[1, 可视半径]，默认1
      - gridColor:String 背景网格颜色
      - gridDash:Array<int> 背景网格虚线样式，默认\[1, 0]
-     - columnWidth:int 圆柱粗细，单位px，∈\[1, 可视半径]
-     - columnColor:String 圆柱颜色
+     - volumeColor:String 圆柱颜色
      - curvature:float 曲线曲率，∈\[0, 1]
      - style:\<String> 绘线类型，取值curve、straight，默认straight
  * getCoords():\<Array> 获取绘制点的坐标，是个二维数组，包含所有线条
