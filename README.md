@@ -43,8 +43,6 @@ npm install yurine-share
      - curvature:float 曲线曲率，∈\[0, 1]
      - style:\<String> 绘线类型，取值curve、straight，默认straight
  * getCoords():\<Array> 获取绘制点的坐标，是个二维数组，包含所有线条
- * getCoord(index:int):\<Array> 获取第index线条的所有坐标，-1从末尾起
- * getPoint():\<x:Number, y:Number> 获取第index线条的第x点的纵坐标，-1从末尾起
 
 # License
 [MIT License]
