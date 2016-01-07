@@ -86,11 +86,11 @@ define(function(require, exports, module){var util=function(){var _0=require('./
   }
   Share.prototype.renderFg = function(context, padding, width, height, minSize, max, min, average, diff, fontSize, lineHeight) {
     var y0 = padding[0];
-    var y1 = (height - padding[0] - padding[2]) * 0.7;
-    var y2 = height - padding[0] - padding[2] - lineHeight - 10;
+    var y1 = (height - padding[0] - padding[2]) * 0.7 + y0;
+    var y2 = height - padding[0] - padding[2] - lineHeight;
     this.renderLine(context, padding, width, minSize, average, diff, y0, y1, y2);
     this.renderVolume(context, padding, width, y1, y2);
-    this.renderRuler(context, padding, width, height, minSize, max, min, average, diff, fontSize, lineHeight);
+    this.renderRuler(context, padding, width, height, minSize, max, min, average, diff, fontSize, lineHeight, y0, y1, y2);
   }
   Share.prototype.renderLine = function(context, padding, width, minSize, average, diff, y0, y1, y2) {
     var length = 240;
@@ -270,7 +270,7 @@ define(function(require, exports, module){var util=function(){var _0=require('./
       context.fillRect(x, y, stepX, h);
     });
   }
-  Share.prototype.renderRuler = function(context, padding, width, height, minSize, max, min, average, diff, fontSize, lineHeight) {
+  Share.prototype.renderRuler = function(context, padding, width, height, minSize, max, min, average, diff, fontSize, lineHeight, y0, y1, y2) {
     var color = this.option.color || '#999';
     if(color.charAt(0) != '#' && color.charAt(0) != 'r') {
       color = '#' + color;
@@ -283,9 +283,6 @@ define(function(require, exports, module){var util=function(){var _0=require('./
     var gridColor = this.option.gridColor || '#DDD';
     var gap = (lineHeight - fontSize) / 2;
 
-    var y0 = padding[0];
-    var y1 = (height - padding[0] - padding[2]) * 0.7;
-    var y2 = height - padding[0] - padding[2] - lineHeight - 10;
     var y3 = y2 + 10;
     var x0 = padding[3];
     var x1 = width - x0;
