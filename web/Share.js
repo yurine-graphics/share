@@ -96,7 +96,7 @@ define(function(require, exports, module){var util=function(){var _0=require('./
     var length = 240;
     var stepX = (width - padding[1] - padding[3]) / (length - 1);
     var stepY = (y1 - y0) / (diff * 2);
-    var coords = this.coords = [];
+    var coords = this._coords = [];
     this.data.price.forEach(function(num, i) {
       var arr = [];
       if(num === null || num === undefined) {
@@ -307,8 +307,6 @@ define(function(require, exports, module){var util=function(){var _0=require('./
     context.lineTo(x1, y2);
     context.stroke();
     context.closePath();
-
-
     context.fillText('09:30', x0, y3);
     var txt = '15:00';
     var w = context.measureText(txt).width;
@@ -333,6 +331,11 @@ define(function(require, exports, module){var util=function(){var _0=require('./
     context.stroke();
     context.closePath();
 
+    context.shadowColor = 'rgba(0,0,0,0.1)';
+    context.shadowOffsetX = 2;
+    context.shadowOffsetY = 2;
+    context.shadowBlur = 2;
+
     y += gap - lineHeight;
     context.fillText(average.toFixed(2), x0, y);
     txt = '0.00%';
@@ -349,6 +352,10 @@ define(function(require, exports, module){var util=function(){var _0=require('./
     context.fillText(txt, x1 - w, y1 - lineHeight + gap);
   }
 
+  var _2={};_2.coords={};_2.coords.get =function() {
+    return this._coords;
+  }
+Object.keys(_2).forEach(function(k){Object.defineProperty(Share.prototype,k,_2[k])});
 
 exports["default"]=Share;
 });

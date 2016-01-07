@@ -96,7 +96,7 @@ class Share {
     var length = 240;
     var stepX = (width - padding[1] - padding[3]) / (length - 1);
     var stepY = (y1 - y0) / (diff * 2);
-    var coords = this.coords = [];
+    var coords = this._coords = [];
     this.data.price.forEach(function(num, i) {
       var arr = [];
       if(num === null || num === undefined) {
@@ -307,8 +307,6 @@ class Share {
     context.lineTo(x1, y2);
     context.stroke();
     context.closePath();
-
-
     context.fillText('09:30', x0, y3);
     var txt = '15:00';
     var w = context.measureText(txt).width;
@@ -333,6 +331,11 @@ class Share {
     context.stroke();
     context.closePath();
 
+    context.shadowColor = 'rgba(0,0,0,0.1)';
+    context.shadowOffsetX = 2;
+    context.shadowOffsetY = 2;
+    context.shadowBlur = 2;
+
     y += gap - lineHeight;
     context.fillText(average.toFixed(2), x0, y);
     txt = '0.00%';
@@ -347,6 +350,10 @@ class Share {
     txt = (-diff * 100 / average).toFixed(2) + '%';
     w = context.measureText(txt).width;
     context.fillText(txt, x1 - w, y1 - lineHeight + gap);
+  }
+
+  get coords() {
+    return this._coords;
   }
 }
 
