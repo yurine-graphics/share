@@ -90,27 +90,30 @@ exports["default"]={
       lineHeight:lineHeight
     };
   },
-  rgb2int(color) {
-    color = color || '#000';
+  rgb2int: function(color) {
     color = color.replace(/^#/, '');
-    if(color.indexOf('rgb') == 0) {
-      color = color.match(/(\d+)[^\d]+(\d+)[^\d]+(\d+)/).slice(1);
-      return [parseInt(color[0]), parseInt(color[1]), parseInt(color[2])];
-    }
     var r = 0;
     var g = 0;
     var b = 0;
-    switch(color.length) {
-      case 3:
-        r = parseInt(color.charAt(0) + color.charAt(0), 16);
-        g = parseInt(color.charAt(1) + color.charAt(1), 16);
-        b = parseInt(color.charAt(2) + color.charAt(2), 16);
-        break;
-      case 6:
-        r = parseInt(color.slice(0, 2), 16);
-        g = parseInt(color.slice(2, 4), 16);
-        b = parseInt(color.slice(4, 6), 16);
-        break;
+    if(color.indexOf('rgb') == 0) {
+      var arr = /(\d+)[^\d]+(\d+)[^\d]+(\d+)/.exec(color);
+      return arr.slice(1).map(function(item) {
+        return parseInt(item);
+      });
+    }
+    else {
+      switch(color.length) {
+        case 3:
+          r = parseInt(color.charAt(0) + color.charAt(0), 16);
+          g = parseInt(color.charAt(1) + color.charAt(1), 16);
+          b = parseInt(color.charAt(2) + color.charAt(2), 16);
+          break;
+        case 6:
+          r = parseInt(color.slice(0, 2), 16);
+          g = parseInt(color.slice(2, 4), 16);
+          b = parseInt(color.slice(4, 6), 16);
+          break;
+      }
     }
     return [r, g, b];
   }
