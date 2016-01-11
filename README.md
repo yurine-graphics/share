@@ -1,15 +1,15 @@
-# yurine-share
+# yurine-timeshare
 
 分时图timeshare，`yurine`取名自`鴉-KARAS-`中的城市精灵百合音。
 
-[![NPM version](https://badge.fury.io/js/yurine-share.png)](https://npmjs.org/package/yurine-share)
+[![NPM version](https://badge.fury.io/js/yurine-timeshare.png)](https://npmjs.org/package/yurine-timeshare)
 
 # INSTALL
 ```
-npm install yurine-share
+npm install yurine-timeshare
 ```
 
-[![preview](https://raw.githubusercontent.com/yurine-graphics/share/master/preview.png)](https://github.com/yurine-graphics/share)
+[![preview](https://raw.githubusercontent.com/yurine-graphics/timeshare/master/preview.png)](https://github.com/yurine-graphics/timeshare)
 
 # API
  * Line(selector:DOM/String, data:\<\<String>, \<int>>, option:Object):Class

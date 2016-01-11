@@ -1,5 +1,5 @@
 {
-  "name": "yurine-share",
+  "name": "yurine-timeshare",
   "version": "0.1.1",
   "description": "分时图",
   "maintainers": [
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/yurine-graphics/share.git"
+    "url": "git://github.com/yurine-graphics/timeshare.git"
   },
   "keywords": [
     "share"
