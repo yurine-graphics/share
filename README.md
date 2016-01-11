@@ -31,8 +31,7 @@ npm install yurine-share
      - height:int 高度，单位px
      - lineWidth:int 绘线粗细，单位px，∈\[1, 可视半径]，默认1
      - lineColor:String 绘线颜色
-     - areaColor:STring 绘线下方区域颜色
-     - areaOpacity:Number 绘线下方区域透明度，∈\[0, 1]，默认0.5
+     - areaColor:String 绘线下方区域颜色
      - averageWidth:int 均线粗细，单位px，∈\[1, 可视半径]，默认1
      - averageColor:String 均线颜色
      - averageDash:Array<int> 均线虚线样式，默认\[6, 4]

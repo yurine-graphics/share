@@ -120,22 +120,18 @@ define(function(require, exports, module){var util=function(){var _0=require('./
     context.lineWidth = lineWidth;
     context.setLineDash([1, 0]);
 
-    var color = util.rgb2int(this.option.areaColor || 'rgb(232, 246, 252)');
-    var opacity = parseFloat(this.option.opacity) || 0.5;
-    var gr = context.createLinearGradient(0, y1, 0, y2);
-    gr.addColorStop(0, 'rgba(' + color.join(',') + ',' + opacity + ')');
-    gr.addColorStop(1, 'rgba(' + color.join(',') + ',' + opacity / 2 + ')');
+    var color = this.option.areaColor || 'rgba(232, 246, 252, 0.5)';
 
     switch(this.option.style) {
       case 'curve':
-        this.renderCurve(context, coords, y0, y1, y2, color, opacity, gr);
+        this.renderCurve(context, coords, y0, y1, y2, color);
         break;
       default:
-        this.renderStraight(context, coords, y1, y2, color, opacity, gr);
+        this.renderStraight(context, coords, y2, color);
         break;
     }
   }
-  Share.prototype.renderCurve = function(context, coords, y0, y1, y2, color, opacity, gr) {
+  Share.prototype.renderCurve = function(context, coords, y0, y1, y2, color) {
     if(coords.length) {
       var clone = [];
       coords.forEach(function(item) {
@@ -191,25 +187,15 @@ define(function(require, exports, module){var util=function(){var _0=require('./
       context.quadraticCurveTo(ctrl[2], ctrl[3], end[0], end[1]);
       context.stroke();
 
-      context.fillStyle = 'rgba(' + color.join(',') + ',' + opacity + ')';
-      context.lineTo(end[0], y1);
-      context.lineTo(start[0], y1);
-      context.lineTo(start[0], y1);
-      context.fill();
-      context.closePath();
-
-      context.fillStyle = gr;
-      context.beginPath();
-      context.moveTo(start[0], y1);
-      context.lineTo(end[0], y1);
+      context.fillStyle = color;
       context.lineTo(end[0], y2);
       context.lineTo(start[0], y2);
-      context.lineTo(start[0], y1);
+      context.lineTo(start[0], start[1]);
       context.fill();
       context.closePath();
     }
   }
-  Share.prototype.renderStraight = function(context, coords, y1, y2, color, opacity, gr) {
+  Share.prototype.renderStraight = function(context, coords, y2, color) {
     if(coords.length) {
       context.beginPath();
       var start;
@@ -230,20 +216,10 @@ define(function(require, exports, module){var util=function(){var _0=require('./
       }
       context.stroke();
 
-      context.fillStyle = 'rgba(' + color.join(',') + ',' + opacity + ')';
-      context.lineTo(end[0], y1);
-      context.lineTo(start[0], y1);
-      context.lineTo(start[0], y1);
-      context.fill();
-      context.closePath();
-
-      context.fillStyle = gr;
-      context.beginPath();
-      context.moveTo(start[0], y1);
-      context.lineTo(end[0], y1);
+      context.fillStyle = color;
       context.lineTo(end[0], y2);
       context.lineTo(start[0], y2);
-      context.lineTo(start[0], y1);
+      context.lineTo(start[0], start[1]);
       context.fill();
       context.closePath();
     }
@@ -283,7 +259,7 @@ define(function(require, exports, module){var util=function(){var _0=require('./
     var gridColor = this.option.gridColor || '#DDD';
     var gap = (lineHeight - fontSize) / 2;
 
-    var y3 = y2 + 10;
+    var y3 = y2 + fontSize / 4;
     var x0 = padding[3];
     var x1 = width - x0;
 
@@ -307,6 +283,7 @@ define(function(require, exports, module){var util=function(){var _0=require('./
     context.lineTo(x1, y2);
     context.stroke();
     context.closePath();
+
     context.fillText('09:30', x0, y3);
     var txt = '15:00';
     var w = context.measureText(txt).width;
