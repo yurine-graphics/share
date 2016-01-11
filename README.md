@@ -1,6 +1,6 @@
 # yurine-share
 
-线图line，`yurine`取名自`鴉-KARAS-`中的城市精灵百合音。
+分时图timeshare，`yurine`取名自`鴉-KARAS-`中的城市精灵百合音。
 
 [![NPM version](https://badge.fury.io/js/yurine-share.png)](https://npmjs.org/package/yurine-share)
 
