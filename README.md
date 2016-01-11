@@ -41,7 +41,7 @@ npm install yurine-timeshare
      - volumeColor:String 圆柱颜色
      - curvature:float 曲线曲率，∈\[0, 1]
      - style:\<String> 绘线类型，取值curve、straight，默认straight
- * getCoords():\<Array> 获取绘制点的坐标，是个二维数组，包含所有线条
+ * getCoords():\<Array\<Number, Number>> 获取绘制点的坐标，是个二维数组，每组为自左上为原点的\[x, y]坐标点
 
 # License
 [MIT License]
